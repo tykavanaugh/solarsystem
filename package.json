@@ -1,12 +1,16 @@
 {
   "name": "solarsystem",
-  "version": "1.0.0",
-  "description": "",
-  "main": "main.js",
+  "private": true,
+  "version": "0.0.0",
   "scripts": {
-    "start": "",
-    "test": "jest"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
   },
-  "author": "",
-  "license": "ISC"
+  "devDependencies": {
+    "vite": "^2.9.7"
+  },
+  "dependencies": {
+    "three": "^0.140.0"
+  }
 }
