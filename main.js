@@ -14,26 +14,43 @@ camera.position.setZ(30);
 renderer.render(scene,camera);
 
 
-const ambientLight = new THREE.AmbientLight(0xffffff,.5);
+const ambientLight = new THREE.AmbientLight(0xffffff,1); //Max light
 scene.add(ambientLight);
 
-const gridHelper = new THREE.GridHelper(200,50);
+const gridHelper = new THREE.GridHelper(500,50);
 const controls = new OrbitControls(camera,renderer.domElement);
 scene.add(gridHelper);
 
 // const spaceTexture = new THREE.TextureLoader().load('./images/spacebgTexture1.jpg');
 // scene.background = spaceTexture;
 
-function addStar(){
-  const geometry = new THREE.SphereGeometry(0.1,24,24);
-  const material = new THREE.MeshStandardMaterial({color:0xffffff,emissive:0xfffffff});
-  const star = new THREE.Mesh(geometry,material);
-  const [x,y,z] = Array(3).fill().map(()=> THREE.MathUtils.randFloatSpread(100));
-  star.position.set(x,y,z);
-  scene.add(star)
-}
+//Sun
+const sun = new THREE.Mesh(
+  new THREE.SphereGeometry( 15, 32, 16 ),
+  new THREE.MeshStandardMaterial( { color: 0xffa500 } ),
+)
+scene.add( sun );
 
-Array(500).fill().forEach(addStar)
+const mercury = new THREE.Mesh(
+  new THREE.SphereGeometry( 2, 16, 8 ),
+  new THREE.MeshStandardMaterial( { color: 0x641e16 } ),
+)
+scene.add( mercury );
+mercury.position.set(25,0,0)
+
+const venus = new THREE.Mesh(
+  new THREE.SphereGeometry( 5, 24, 16 ),
+  new THREE.MeshStandardMaterial( { color: 0xf0b27a  } ),
+)
+scene.add( venus );
+venus.position.set(40,0,0)
+
+const earth = new THREE.Mesh(
+  new THREE.SphereGeometry( 5, 24, 16 ),
+  new THREE.MeshStandardMaterial( { color: 0x1a5276   } ),
+)
+scene.add( earth );
+earth.position.set(55,0,0)
 
 function moveCamera(){
   const t = document.body.getBoundingClientRect().top;
