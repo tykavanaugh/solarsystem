@@ -25,80 +25,91 @@ scene.add(gridHelper);
 // scene.background = spaceTexture;
 
 //Sun
+const sunTexture = new THREE.TextureLoader().load('./textures/sunmap.jpg')
 const sun = new THREE.Mesh(
-  new THREE.SphereGeometry( 15, 32, 16 ),
-  new THREE.MeshStandardMaterial( { color: 0xffa500 } ),
+  new THREE.SphereGeometry( 15, 64, 32 ),
+  new THREE.MeshStandardMaterial( { color: 0xffa500,map:sunTexture } ),
 )
 scene.add( sun );
 
 //Mercury
+const mercuryTexture = new THREE.TextureLoader().load('./textures/mercurymap.jpg')
 let mecuryDegreePos = 90
 const mercury = new THREE.Mesh(
   new THREE.SphereGeometry( 2, 16, 8 ),
-  new THREE.MeshStandardMaterial( { color: 0x484848} ),
+  new THREE.MeshStandardMaterial( { color: 0x484848,map:mercuryTexture} ),
 )
 scene.add( mercury );
 mercury.position.set(25,0,0)
 
 //Venus
+const venusTexture = new THREE.TextureLoader().load('./textures/venusmap.jpg')
+
 let venusDegreePos = 270
 const venus = new THREE.Mesh(
   new THREE.SphereGeometry( 3.5, 24, 16 ),
-  new THREE.MeshStandardMaterial( { color: 0xb8b8b8  } ),
+  new THREE.MeshStandardMaterial( { color: 0xb8b8b8,map:venusTexture } ),
 )
 scene.add( venus );
 venus.position.set(40,0,0)
 
 //Earth
+const earthTexture = new THREE.TextureLoader().load('./textures/earthmap1k.jpg')
 let earthDegreePos = 0
 const earth = new THREE.Mesh(
-  new THREE.SphereGeometry( 4, 24, 16 ),
-  new THREE.MeshStandardMaterial( { color: 0x1a5276   } ),
+  new THREE.SphereGeometry( 4, 48, 24 ),
+  new THREE.MeshStandardMaterial( { color: 0x1a5276,map:earthTexture   } ),
 )
 scene.add( earth );
 earth.position.set(55,0,0)
 
 //Mars
+const marsTexture = new THREE.TextureLoader().load('./textures/marsmap1k.jpg')
 let marDegreePos = 300
 const mars = new THREE.Mesh(
   new THREE.SphereGeometry( 3, 24, 16 ),
-  new THREE.MeshStandardMaterial( { color: 0x993d00   } ),
+  new THREE.MeshStandardMaterial( { color: 0x993d00,map:marsTexture } ),
 )
 scene.add( mars );
 mars.position.set(70,0,0)
 
 //Jupiter
+const jupiterTexture = new THREE.TextureLoader().load('./textures/jupitermap.jpg')
+
 let jupiterDegreePos = 265
 const jupiter = new THREE.Mesh(
   new THREE.SphereGeometry( 5, 24, 16 ),
-  new THREE.MeshStandardMaterial( { color: 0xb07f35   } ),
+  new THREE.MeshStandardMaterial( { color: 0xb07f35,map:jupiterTexture } ),
 )
 scene.add( jupiter );
 jupiter.position.set(100,0,0)
 
 //Saturn
+const saturnTexture = new THREE.TextureLoader().load('./textures/saturnmap.jpg')
 let saturnDegreePos = 280
 const saturn = new THREE.Mesh(
   new THREE.SphereGeometry( 5, 24, 16 ),
-  new THREE.MeshStandardMaterial( { color: 0xb08f36   } ),
+  new THREE.MeshStandardMaterial( { color: 0xb08f36,map:saturnTexture  } ),
 )
 scene.add( saturn );
 saturn.position.set(135,0,0)
 
 //Uranus
+const uranusTexture = new THREE.TextureLoader().load('./textures/uranusmap.jpg')
 let uranusDegreePos = 0
 const uranus = new THREE.Mesh(
   new THREE.SphereGeometry( 5, 24, 16 ),
-  new THREE.MeshStandardMaterial( { color: 0x5580aa   } ),
+  new THREE.MeshStandardMaterial( { color: 0x5580aa,map:uranusTexture } ),
 )
 scene.add( uranus );
 uranus.position.set(165,0,0)
 
 //Neptune
+const neptuneTexture = new THREE.TextureLoader().load('./textures/neptunemap.jpg')
 let neptuneDegreePos = 0
 const neptune = new THREE.Mesh(
   new THREE.SphereGeometry( 5, 24, 16 ),
-  new THREE.MeshStandardMaterial( { color: 0x366896  } ),
+  new THREE.MeshStandardMaterial( { color: 0x366896,map:neptuneTexture} ),
 )
 scene.add( neptune );
 neptune.position.set(195,0,0)
