@@ -10,29 +10,35 @@ const renderer = new THREE.WebGL1Renderer({
 
 renderer.setPixelRatio(window.devicePixelRatio);
 renderer.setSize(window.innerWidth,window.innerHeight);
-renderer.render(scene,camera);
 
 // Camera Globals
-let cameraZPosition = 250
+let cameraZPosition = -4
 let cameraDegreePos = 90
 
+camera.position.setZ(cameraZPosition);
+renderer.render(scene,camera);
 
-const ambientLight = new THREE.AmbientLight(0xffffff,1); //Max light
+const ambientLight = new THREE.AmbientLight(0xffffff,.5); //Max light
 scene.add(ambientLight);
 
-const gridHelper = new THREE.GridHelper(500,50);
-const controls = new OrbitControls(camera,renderer.domElement);
-scene.add(gridHelper);
+const pointlight = new THREE.PointLight( 0xffffff, 1, 300);
+pointlight.position.set( 0,0,0 );
+pointlight.decay = 0
+scene.add( pointlight );
 
-// const spaceTexture = new THREE.TextureLoader().load('./images/spacebgTexture1.jpg');
-// scene.background = spaceTexture;
+// For editing
+// const gridHelper = new THREE.GridHelper(500,50);
+// const controls = new OrbitControls(camera,renderer.domElement);
+// scene.add(gridHelper);
+
 
 //Sun
 const sunTexture = new THREE.TextureLoader().load('./textures/sunmap.jpg')
 const sun = new THREE.Mesh(
-  new THREE.SphereGeometry( 15, 64, 32 ),
-  new THREE.MeshStandardMaterial( { color: 0xffa500,map:sunTexture } ),
+  new THREE.SphereGeometry( 13, 64, 32 ),
+  new THREE.MeshPhongMaterial( { color: 0xffa500,map:sunTexture,emissive:new THREE.Color(0,0,0) } ),
 )
+
 scene.add( sun );
 
 //Mercury
@@ -43,7 +49,7 @@ const mercury = new THREE.Mesh(
   new THREE.MeshStandardMaterial( { color: 0x484848,map:mercuryTexture} ),
 )
 scene.add( mercury );
-mercury.position.set(25,0,0)
+mercury.position.set(30,0,0)
 
 //Venus
 const venusTexture = new THREE.TextureLoader().load('./textures/venusmap.jpg')
@@ -54,7 +60,7 @@ const venus = new THREE.Mesh(
   new THREE.MeshStandardMaterial( { color: 0xb8b8b8,map:venusTexture } ),
 )
 scene.add( venus );
-venus.position.set(40,0,0)
+venus.position.set(50,0,0)
 
 //Earth
 const earthTexture = new THREE.TextureLoader().load('./textures/earthmap1k.jpg')
@@ -64,7 +70,7 @@ const earth = new THREE.Mesh(
   new THREE.MeshStandardMaterial( { color: 0x1a5276,map:earthTexture   } ),
 )
 scene.add( earth );
-earth.position.set(55,0,0)
+earth.position.set(65,0,0)
 
 //Mars
 const marsTexture = new THREE.TextureLoader().load('./textures/marsmap1k.jpg')
@@ -74,7 +80,7 @@ const mars = new THREE.Mesh(
   new THREE.MeshStandardMaterial( { color: 0x993d00,map:marsTexture } ),
 )
 scene.add( mars );
-mars.position.set(70,0,0)
+mars.position.set(80,0,0)
 
 //Jupiter
 const jupiterTexture = new THREE.TextureLoader().load('./textures/jupitermap.jpg')
@@ -85,7 +91,7 @@ const jupiter = new THREE.Mesh(
   new THREE.MeshStandardMaterial( { color: 0xb07f35,map:jupiterTexture } ),
 )
 scene.add( jupiter );
-jupiter.position.set(100,0,0)
+jupiter.position.set(115,0,0)
 
 //Saturn
 const saturnTexture = new THREE.TextureLoader().load('./textures/saturnmap.jpg')
@@ -95,7 +101,7 @@ const saturn = new THREE.Mesh(
   new THREE.MeshStandardMaterial( { color: 0xb08f36,map:saturnTexture  } ),
 )
 scene.add( saturn );
-saturn.position.set(135,0,0)
+saturn.position.set(145,0,0)
 
 //Uranus
 const uranusTexture = new THREE.TextureLoader().load('./textures/uranusmap.jpg')
@@ -105,7 +111,7 @@ const uranus = new THREE.Mesh(
   new THREE.MeshStandardMaterial( { color: 0x5580aa,map:uranusTexture } ),
 )
 scene.add( uranus );
-uranus.position.set(165,0,0)
+uranus.position.set(175,0,0)
 
 //Neptune
 const neptuneTexture = new THREE.TextureLoader().load('./textures/neptunemap.jpg')
@@ -115,7 +121,7 @@ const neptune = new THREE.Mesh(
   new THREE.MeshStandardMaterial( { color: 0x366896,map:neptuneTexture} ),
 )
 scene.add( neptune );
-neptune.position.set(195,0,0)
+neptune.position.set(200,0,0)
 
 //starry background
 const spaceTexture = new THREE.TextureLoader().load('./textures/space-stars-twinkle.gif');
@@ -135,7 +141,7 @@ const mecuryOrbit = () => {
   } else {
     mecuryDegreePos += .4
   }
-  let coords = convertCoord(25,mecuryDegreePos)
+  let coords = convertCoord(30,mecuryDegreePos)
   mercury.position.x = coords['x']
   mercury.position.z = coords['y']
 }
@@ -146,7 +152,7 @@ const venusOrbit = () => {
   } else {
     venusDegreePos += .12
   }
-  let coords = convertCoord(40,venusDegreePos)
+  let coords = convertCoord(50,venusDegreePos)
   venus.position.x = coords['x']
   venus.position.z = coords['y']
 }
@@ -157,7 +163,7 @@ const earthOrbit = () => {
   } else {
     earthDegreePos += .1
   }
-  let coords = convertCoord(55,earthDegreePos)
+  let coords = convertCoord(65,earthDegreePos)
   earth.position.x = coords['x']
   earth.position.z = coords['y']
 }
@@ -168,7 +174,7 @@ const marOrbit = () => {
   } else {
     marDegreePos += .07
   }
-  let coords = convertCoord(70,marDegreePos)
+  let coords = convertCoord(80,marDegreePos)
   mars.position.x = coords['x']
   mars.position.z = coords['y']
 }
@@ -179,7 +185,7 @@ const jupiterOrbit = () => {
   } else {
     jupiterDegreePos += .35
   }
-  let coords = convertCoord(100,jupiterDegreePos)
+  let coords = convertCoord(115,jupiterDegreePos)
   jupiter.position.x = coords['x']
   jupiter.position.z = coords['y']
 }
@@ -190,7 +196,7 @@ const saturnOrbit = () => {
   } else {
     saturnDegreePos += .13
   }
-  let coords = convertCoord(135,saturnDegreePos)
+  let coords = convertCoord(145,saturnDegreePos)
   saturn.position.x = coords['x']
   saturn.position.z = coords['y']
 }
@@ -201,7 +207,7 @@ const uranusOrbit = () => {
   } else {
     uranusDegreePos += .25
   }
-  let coords = convertCoord(165,uranusDegreePos)
+  let coords = convertCoord(175,uranusDegreePos)
   uranus.position.x = coords['x']
   uranus.position.z = coords['y']
 }
@@ -212,7 +218,7 @@ const neptuneOrbit = () => {
   } else {
     neptuneDegreePos += .05
   }
-  let coords = convertCoord(195,neptuneDegreePos)
+  let coords = convertCoord(200,neptuneDegreePos)
   neptune.position.x = coords['x']
   neptune.position.z = coords['y']
 }
@@ -223,9 +229,13 @@ function getRandomNRange(min, max) {
 
 // Inital camera set
 
+const normalize = (val,max,min) => {
+  return (val - min) / (max - min);
+}
+
 function moveCameraZ(){
   const t = document.body.getBoundingClientRect().top;
-  cameraZPosition = 250 + t * .05
+  cameraZPosition = normalize(t*10,200,0)
 }
 
 camera.position.x = 30
@@ -258,7 +268,7 @@ function animate(){
   neptuneOrbit()
   moveCameraXY()
   camera.position.setZ(cameraZPosition);
-  camera.lookAt(0,0,0)
+  camera.lookAt(earth.position)
   renderer.render(scene,camera);
 }
 
