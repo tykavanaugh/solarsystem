@@ -31,26 +31,70 @@ const sun = new THREE.Mesh(
 )
 scene.add( sun );
 
+//Mercury
 const mercury = new THREE.Mesh(
   new THREE.SphereGeometry( 2, 16, 8 ),
-  new THREE.MeshStandardMaterial( { color: 0x641e16 } ),
+  new THREE.MeshStandardMaterial( { color: 0x484848} ),
 )
 scene.add( mercury );
 mercury.position.set(25,0,0)
 
+//Venus
 const venus = new THREE.Mesh(
-  new THREE.SphereGeometry( 5, 24, 16 ),
-  new THREE.MeshStandardMaterial( { color: 0xf0b27a  } ),
+  new THREE.SphereGeometry( 3.5, 24, 16 ),
+  new THREE.MeshStandardMaterial( { color: 0xb8b8b8  } ),
 )
 scene.add( venus );
 venus.position.set(40,0,0)
 
+//Earth
 const earth = new THREE.Mesh(
-  new THREE.SphereGeometry( 5, 24, 16 ),
+  new THREE.SphereGeometry( 4, 24, 16 ),
   new THREE.MeshStandardMaterial( { color: 0x1a5276   } ),
 )
 scene.add( earth );
 earth.position.set(55,0,0)
+
+//Mars
+const mars = new THREE.Mesh(
+  new THREE.SphereGeometry( 3, 24, 16 ),
+  new THREE.MeshStandardMaterial( { color: 0x993d00   } ),
+)
+scene.add( mars );
+mars.position.set(70,0,0)
+
+//Jupiter
+const jupiter = new THREE.Mesh(
+  new THREE.SphereGeometry( 5, 24, 16 ),
+  new THREE.MeshStandardMaterial( { color: 0xb07f35   } ),
+)
+scene.add( jupiter );
+jupiter.position.set(100,0,0)
+
+//Saturn
+const saturn = new THREE.Mesh(
+  new THREE.SphereGeometry( 5, 24, 16 ),
+  new THREE.MeshStandardMaterial( { color: 0xb08f36   } ),
+)
+scene.add( saturn );
+saturn.position.set(135,0,0)
+
+//Uranus
+const uranus = new THREE.Mesh(
+  new THREE.SphereGeometry( 5, 24, 16 ),
+  new THREE.MeshStandardMaterial( { color: 0x5580aa   } ),
+)
+scene.add( uranus );
+uranus.position.set(165,0,0)
+
+//Neptune
+const neptune = new THREE.Mesh(
+  new THREE.SphereGeometry( 5, 24, 16 ),
+  new THREE.MeshStandardMaterial( { color: 0x366896  } ),
+)
+scene.add( neptune );
+neptune.position.set(195,0,0)
+
 
 function moveCamera(){
   const t = document.body.getBoundingClientRect().top;
