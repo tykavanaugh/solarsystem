@@ -10,8 +10,11 @@ const renderer = new THREE.WebGL1Renderer({
 
 renderer.setPixelRatio(window.devicePixelRatio);
 renderer.setSize(window.innerWidth,window.innerHeight);
-camera.position.setZ(30);
 renderer.render(scene,camera);
+
+// Camera Globals
+let cameraZPosition = 250
+let cameraDegreePos = 90
 
 
 const ambientLight = new THREE.AmbientLight(0xffffff,1); //Max light
@@ -118,11 +121,6 @@ neptune.position.set(195,0,0)
 const spaceTexture = new THREE.TextureLoader().load('./textures/space-stars-twinkle.gif');
 scene.background = spaceTexture;
 
-
-function moveCamera(){
-  const t = document.body.getBoundingClientRect().top;
-}
-
 // document.body.onscroll = moveCamera
 
 const convertCoord = (radius,angle) => {
@@ -219,6 +217,34 @@ const neptuneOrbit = () => {
   neptune.position.z = coords['y']
 }
 
+function getRandomNRange(min, max) {
+  return Math.random() * (max - min) + min;
+}
+
+// Inital camera set
+
+function moveCameraZ(){
+  const t = document.body.getBoundingClientRect().top;
+  cameraZPosition = 250 + t * .05
+}
+
+camera.position.x = 30
+camera.position.y = 40
+
+function moveCameraXY(){
+  const hypo = Math.hypot(camera.position.x,camera.position.y)
+  if (cameraDegreePos === 360){
+    cameraDegreePos = 0
+  } else {
+    cameraDegreePos += .2
+  }
+  const coords = convertCoord(hypo,cameraDegreePos)
+  camera.position.setX(coords['x'])
+  camera.position.setY(coords['y'])
+}
+
+document.body.onscroll = moveCameraZ
+
 
 function animate(){
   requestAnimationFrame(animate);
@@ -230,6 +256,9 @@ function animate(){
   saturnOrbit()
   uranusOrbit()
   neptuneOrbit()
+  moveCameraXY()
+  camera.position.setZ(cameraZPosition);
+  camera.lookAt(0,0,0)
   renderer.render(scene,camera);
 }
 
