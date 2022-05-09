@@ -18,15 +18,16 @@ let cameraDegreePos = 90
 camera.position.setZ(cameraZPosition);
 renderer.render(scene,camera);
 
-const ambientLight = new THREE.AmbientLight(0xffffff,.5); //Max light
+const ambientLight = new THREE.AmbientLight(0xffffff,.15); //Ambient
 scene.add(ambientLight);
 
-const pointlight = new THREE.PointLight( 0xffffff, 1, 300);
+const pointlight = new THREE.PointLight( 0xffffff, 1, 300); //Sunlight
 pointlight.position.set( 0,0,0 );
 pointlight.decay = 0
+pointlight.power = 35
 scene.add( pointlight );
 
-// For editing
+// // For editing
 // const gridHelper = new THREE.GridHelper(500,50);
 // const controls = new OrbitControls(camera,renderer.domElement);
 // scene.add(gridHelper);
@@ -36,9 +37,13 @@ scene.add( pointlight );
 const sunTexture = new THREE.TextureLoader().load('./textures/sunmap.jpg')
 const sun = new THREE.Mesh(
   new THREE.SphereGeometry( 13, 64, 32 ),
-  new THREE.MeshPhongMaterial( { color: 0xffa500,map:sunTexture,emissive:new THREE.Color(0,0,0) } ),
+  new THREE.MeshPhongMaterial( { 
+    color: 0xffa500,
+    map:sunTexture,
+    emissive:new THREE.Color(1,.8,0) ,
+    emissiveIntensity: .8
+  } ),
 )
-
 scene.add( sun );
 
 //Mercury
@@ -71,6 +76,17 @@ const earth = new THREE.Mesh(
 )
 scene.add( earth );
 earth.position.set(65,0,0)
+
+//Moon
+const moonTexture = new THREE.TextureLoader().load('./textures/moonMap.jpg')
+let moonDegreePos = 0
+const moon = new THREE.Mesh(
+  new THREE.SphereGeometry(1,24,12),
+  new THREE.MeshStandardMaterial( { 
+    map:moonTexture,
+  } ),
+)
+scene.add(moon)
 
 //Mars
 const marsTexture = new THREE.TextureLoader().load('./textures/marsmap1k.jpg')
@@ -223,6 +239,18 @@ const neptuneOrbit = () => {
   neptune.position.z = coords['y']
 }
 
+const moonOrbit = () => {
+  if (moonDegreePos === 360){
+    moonDegreePos = 0
+  } else {
+    moonDegreePos += 1
+  }
+  let coords = convertCoord(10,moonDegreePos)
+  moon.position.x = earth.position.x + coords['x']
+  moon.position.z = earth.position.z + coords['y']
+  moon.position.y = earth.position.y
+}
+
 function getRandomNRange(min, max) {
   return Math.random() * (max - min) + min;
 }
@@ -239,7 +267,7 @@ function moveCameraZ(){
 }
 
 camera.position.x = 30
-camera.position.y = 40
+camera.position.y = 45
 
 function moveCameraXY(){
   const hypo = Math.hypot(camera.position.x,camera.position.y)
@@ -266,6 +294,16 @@ function animate(){
   saturnOrbit()
   uranusOrbit()
   neptuneOrbit()
+  moonOrbit()
+  sun.rotation.y += .01
+  mercury.rotation.y += .01
+  venus.rotation.y += .01
+  earth.rotation.y += .01
+  mars.rotation.y += .01
+  jupiter.rotation.y += .01
+  saturn.rotation.y += .01
+  neptune.rotation.y += .01
+  uranus.rotation.y += .01
   moveCameraXY()
   camera.position.setZ(cameraZPosition);
   camera.lookAt(earth.position)
