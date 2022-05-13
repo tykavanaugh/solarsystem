@@ -8,9 +8,10 @@
     "preview": "vite preview"
   },
   "devDependencies": {
-    "vite": "^2.9.7"
+    "vite": "^2.9.9"
   },
   "dependencies": {
+    "bootstrap-icons": "^1.8.1",
     "three": "^0.140.0"
   }
 }
